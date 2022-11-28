@@ -1,0 +1,44 @@
+{
+  "name": "comboparser",
+  "version": "1.0.0",
+  "description": "A parser combinator for high-order language building",
+  "license": "MIT",
+  "keywords": [ "parser", "combinator" ],
+  "author": "Daniele Domenichelli <daniele.domenichelli.5+ddomen@gmail.com>",
+  "types": "./dist/cjs/comboparser.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/comboparser.js",
+      "import": "./dist/esm/comboparser.js",
+      "node": "./dist/cjs/comboparser.js",
+      "default": "./dist/cjs/comboparser.js",
+      "types": "./dist/cjs/comboparser.d.ts"
+    }
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "check:watch": "tsc --noEmit --watch",
+    "build": "npm run build:es2015 && npm run build:cjs && npm run build:umd:min",
+    "build:es2015": "tsc --module es2015 --target es2015 --outDir dist/es2015",
+    "build:esm": "tsc --module es2015 --target es5 --outDir dist/esm",
+    "build:cjs": "tsc --module commonjs --target es5 --outDir dist/cjs",
+    "build:umd": "npm run build:esm && rollup --input dist/esm/comboparser.js --format umd --name ComboParser --file dist/umd/comboparser.js --sourcemap",
+    "build:umd:min": "npm run build:umd && cd dist/umd && uglifyjs --compress --mangle --source-map --comments --output comboparser.min.js -- comboparser.js && gzip comboparser.min.js",
+    "watch:es2015": "tsc --module es2015 --target es2015 --outDir dist/es2015 --watch",
+    "watch:esm": "tsc --module es2015 --target es5 --outDir dist/esm --watch",
+    "watch:cjs": "tsc --module commonjs --target es5 --outDir dist/cjs --watch"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "gzip-cli": "^1.2.0",
+    "rollup": "^3.4.0",
+    "typescript": "^4.9.3",
+    "uglify-js": "^3.17.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddomen/comboparser.git"
+  },
+  "bugs": { "url": "https://github.com/ddomen/comboparser/issues" },
+  "homepage": "https://github.com/ddomen/comboparser#readme"
+}
