@@ -771,9 +771,12 @@ export namespace binary {
     }
     function _str(value: Binariable, start?: number, end?: number): string {
         if (typeof(value) === 'string') { return value.slice(start, end); }
-        if (value instanceof ArrayBuffer) { value = Array.prototype.slice.call(new Uint8Array(value)) as number[]; }
+        if (
+            value instanceof ArrayBuffer ||
+            (typeof(SharedArrayBuffer) !== 'undefined' && value instanceof SharedArrayBuffer)
+        ) { value = Array.prototype.slice.call(new Uint8Array(value)) as number[]; }
         else if (ArrayBuffer.isView(value)) { value = Array.prototype.slice.call(new Uint8Array(value.buffer, value.byteOffset, value.byteLength)) as number[]; }
-        return '<' + value.slice(start, end).map(v => _hex(v)).join(', ') + '>';
+        return '<' + (value as number[]).slice(start, end).map(v => _hex(v)).join(', ') + '>';
     }
 
 
