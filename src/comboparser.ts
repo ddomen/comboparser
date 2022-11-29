@@ -482,7 +482,9 @@ export function sequence(...parsers: Parser[]): any {
     const results: any[] = [];
     for (const p of parsers) {
       next = p(next);
-      if (next.isError) { return _error(state, next.error); }
+      if (next.isError) {
+        return _error(state, next.error);
+      }
       results.push(next.result);
     }
     return _state(next, results);
