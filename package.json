@@ -33,7 +33,7 @@
     "build:es2015": "tsc --module es2015 --target es2015 --outDir lib/es2015",
     "build:esm": "tsc --module es2015 --target es5 --outDir lib/esm",
     "build:cjs": "tsc --module commonjs --target es5 --outDir lib/cjs",
-    "build:umd": "npm run build:esm && rollup --input lib/esm/comboparser.js --format umd --name ComboParser --file lib/umd/comboparser.js --sourcemap",
+    "build:umd": "npm run build:esm && rollup --input lib/esm/comboparser.js --format umd --name ComboParser --file lib/umd/comboparser.js --exports named --sourcemap",
     "build:umd:min": "npm run build:umd && cd lib/umd && uglifyjs --compress --mangle --source-map --comments --output comboparser.min.js -- comboparser.js && gzip comboparser.min.js",
     "watch:es2015": "tsc --module es2015 --target es2015 --outDir lib/es2015 --watch",
     "watch:esm": "tsc --module es2015 --target es5 --outDir lib/esm --watch",
