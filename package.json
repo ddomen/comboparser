@@ -9,6 +9,7 @@
   ],
   "author": "Daniele Domenichelli <daniele.domenichelli.5+ddomen@gmail.com>",
   "types": "./lib/cjs/comboparser.d.ts",
+  "main": "index.js",
   "exports": {
     ".": {
       "require": "./lib/cjs/comboparser.js",
